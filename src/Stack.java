@@ -20,85 +20,30 @@ public class Stack {
 		return tail;
 	}
 	
-	public void add(Node newNode) {
-		//System.out.println(size);
-		boolean last = true;
-		placeHolder = head;
-		if(size == 0) {
-			head = newNode;
-			last = false;
-		}
-		else if(size == 1) {
-			//if head comes before newNode = 1
-			if(newNode.getName().compareToIgnoreCase(head.getName()) > 0) {
-				placeHolder.setNext(newNode);
-				newNode.setPrevious(placeHolder);
-				tail = newNode;
-				tail.setNext(null);
-			}
-			else if(newNode.getName().compareToIgnoreCase(head.getName()) == 0) {
-				System.out.println(newNode.getName() + " is a duplicate and therrefore was not added");
-			}
-			else {
-				head.setPrevious(newNode);
-				newNode.setNext(head);
-				tail = head;
-				head = newNode;
-			}
-			last = false;
+	public void push(Node newNode) {
+		if(tail == null) {
+			tail = newNode;
+			head = newNode;				//get track of head for now just in case we need it
 		}
 		else {
-			//loop through list from head to tail -1 because tail is a special case
-			for(int i = 0; i < size-1; i++) {
-	
-				//if its before placeHolder it returns -1
-				int before = newNode.getName().compareToIgnoreCase(placeHolder.getName());
-				//if its after placeHolder it returns a -1
-				int after = newNode.getName().compareToIgnoreCase(placeHolder.getNext().getName());
-				//if before > 0 then it is before placeHolder
-				if(before < 0) {
-					//if i = 0 then it is before head
-					if(i == 0) {
-						newNode.setNext(placeHolder);
-						placeHolder.setPrevious(newNode);
-						head = newNode;
-					}
-					else {
-						newNode.setPrevious(placeHolder.getPrevious());
-						newNode.setNext(placeHolder);
-						placeHolder.getPrevious().setNext(newNode);
-						placeHolder.setPrevious(newNode);
-					}	
-					last = false;
-					break;
-				}
-				else if(after < 0) {
-					newNode.setPrevious(placeHolder);
-					newNode.setNext(placeHolder.getNext());
-					placeHolder.getNext().setPrevious(newNode);
-					placeHolder.setNext(newNode);
-					last = false;
-					break;
-				}
-				//if before = 0 or after is = 0 then it is a duplicate and do not allow user to add it
-				else if(before == 0 || after == 0) {
-					System.out.println(newNode.getName() + " is a duplicate and therefore was not added");
-					last = false;
-					break;
-				}
-				placeHolder = placeHolder.getNext();
-			}
-		}
-		
-		//if last = true then it is at the end of the list
-		if(last) {
-				newNode.setPrevious(tail);
-				tail.setNext(newNode);
-				tail = newNode;
+			newNode.setPrevious(tail);
+			tail = newNode;
 		}
 		size++;
 	}
 	
+	public Node pop() {
+		placeHolder = tail;
+		tail = tail.getPrevious();
+		size--;
+		return placeHolder;
+	}
+	
+	public Node peek() {
+		return tail;
+	}
+	
+	/*
 	public boolean find(String name) {
 		boolean contains = false;
 		placeHolder = head;
@@ -165,6 +110,5 @@ public class Stack {
 		head = null;
 		tail = null;
 	}
+	*/
 }
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
