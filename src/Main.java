@@ -63,44 +63,76 @@ public class Main {
 		System.out.print(stack.pop().getName() + " ");
 		System.out.print(stack.pop().getName() + " ");
 		System.out.println(stack.pop().getName() + " ");
+		
+		stack.push(node4);
+		stack.push(node3);
+		stack.push(node2);
+		stack.push(node1);
+		
+		Stack newStack = new Stack();
+		newStack = stackToStack(stack);
+		
+		System.out.println("Stack to Stack");
+		System.out.println("On the New Stack:");
+		System.out.print(newStack.pop().getName() + " ");
+		System.out.print(newStack.pop().getName() + " ");
+		System.out.print(newStack.pop().getName() + " ");
+		System.out.println(newStack.pop().getName() + " ");
+		
 	}
 	//works but have to deal with null pointer exception in queue and stack
 	public static void stackToQueue(Stack stack, Queue queue) {
-		Node temp = stack.pop();
+		try {
+			stack.peek();
+		} catch(IllegalArgumentException e) {
+			System.out.println("The Stack is empty");
+			return;
+		}
+		Node temp = stack.pop(); 
 		while(temp != null) {
 			queue.enqueue(temp);
+			try {	
 				temp = stack.pop();
+			} catch(IllegalArgumentException e) {
+				return;
+			}
 		}
 	}
 	
 	public static void queueToStack(Queue queue, Stack stack) {
+		try {
+			queue.peek();
+		} catch(IllegalArgumentException e) {
+			System.out.println("The Stack is empty");
+			return;
+		}
 		Node temp = queue.dequeue();
 		Stack tempStack = new Stack();
 		while(temp != null) {
 			tempStack.push(temp);
-			temp = queue.dequeue();
+			try {	
+				temp = queue.dequeue();
+			} catch(IllegalArgumentException e) {
+				//Supposed to get here because queue is empty
+				//but dont return because method is not done yet
+			}
 		}
 		temp = tempStack.pop();
 		while(temp != null) {
 			stack.push(temp);
-			temp = tempStack.pop();
+			try {	
+				temp = tempStack.pop();
+			} catch(IllegalArgumentException e) {
+				return;
+			}
 		}
 	}
 	
-	public static void stackToStack(Stack stack) {
+	public static Stack stackToStack(Stack stack) {
 		Queue tempQ = new Queue();
 		Stack tempStack = new Stack();
 		stackToQueue(stack, tempQ);
-		Node temp = tempQ.dequeue();
-		while(temp != null) {
-			tempStack.push(temp);
-			temp = tempQ.dequeue();
-		}
+		queueToStack(tempQ, tempStack);
+		return tempStack;
 	}
 }
-// red is house the
-// 
-
-//the dog is red
-//Stack: red,is,dog,the
-//queue: the dog is red

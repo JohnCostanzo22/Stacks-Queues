@@ -26,8 +26,7 @@ public class Queue {
 		
 		public Node dequeue() {
 			if(tail == null) {
-				//System.out.println("The queue is empty");
-				return null;
+				throw new IllegalArgumentException("The Queue is empty");
 			}
 			else if (tail.getPrevious() == null) {
 				placeHolder = tail;
@@ -42,6 +41,11 @@ public class Queue {
 		}
 		
 		public Node peek() {
-			return tail;
+			if(tail == null) {
+				throw new IllegalArgumentException("The Queue is empty");
+			}
+			else {
+				return tail;
+			}
 		}
 }

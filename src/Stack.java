@@ -21,7 +21,7 @@ public class Stack {
 	public Node pop() {
 		if(tail == null) {
 			//System.out.println("The stack is empty");
-			return null;
+			throw new IllegalArgumentException("The Stack is empty");
 		}
 		else if(tail.getPrevious() == null) {
 			placeHolder = tail;
@@ -36,6 +36,11 @@ public class Stack {
 	}
 	
 	public Node peek() {
-		return tail;
+		if(tail == null) {
+			throw new IllegalArgumentException("The Stack is empty");
+		}
+		else {
+			return tail;
+		}
 	}
 }
