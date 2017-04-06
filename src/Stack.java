@@ -20,16 +20,18 @@ public class Stack {
 	
 	public Node pop() {
 		if(tail == null) {
-			System.out.println("The stack is empty");
+			//System.out.println("The stack is empty");
 			return null;
 		}
 		else if(tail.getPrevious() == null) {
 			placeHolder = tail;
 			tail = null;
+			placeHolder.setPrevious(null);   				//reset the node so it can be reused
 			return placeHolder;
 		}
 		placeHolder = tail;
 		tail = tail.getPrevious();
+		placeHolder.setPrevious(null);   				//reset the node so it can be reused
 		return placeHolder;
 	}
 	
