@@ -79,6 +79,11 @@ public class Main {
 		System.out.print(newStack.pop().getName() + " ");
 		System.out.println(newStack.pop().getName() + " ");
 		
+		//testing of handling blank things
+		stackToQueue(stack, queue);
+		queueToStack(queue, stack);
+		stackToStack(stack);
+		
 	}
 	//works but have to deal with null pointer exception in queue and stack
 	public static void stackToQueue(Stack stack, Queue queue) {
@@ -103,7 +108,7 @@ public class Main {
 		try {
 			queue.peek();
 		} catch(IllegalArgumentException e) {
-			System.out.println("The Stack is empty");
+			System.out.println("The Queue is empty");
 			return;
 		}
 		Node temp = queue.dequeue();
@@ -113,8 +118,8 @@ public class Main {
 			try {	
 				temp = queue.dequeue();
 			} catch(IllegalArgumentException e) {
-				//Supposed to get here because queue is empty
-				//but dont return because method is not done yet
+				break;		//Going to get here. Need to handle the exception, but keep
+							//going because method is not finished
 			}
 		}
 		temp = tempStack.pop();
