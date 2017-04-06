@@ -1,4 +1,3 @@
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -85,7 +84,11 @@ public class Main {
 		stackToStack(stack);
 		
 	}
-	//works but have to deal with null pointer exception in queue and stack
+	/**
+	 * method to convert a stack to queue and maintain proper order
+	 * @param stack - the Stack
+	 * @param queue - the Queue
+	 */
 	public static void stackToQueue(Stack stack, Queue queue) {
 		try {
 			stack.peek();
@@ -104,6 +107,11 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Method to convert a queue to a stack and maintain proper order
+	 * @param queue - the Queue
+	 * @param stack - the Stack
+	 */
 	public static void queueToStack(Queue queue, Stack stack) {
 		try {
 			queue.peek();
@@ -133,6 +141,11 @@ public class Main {
 		}
 	}
 	
+	/**
+	 * Method to convert a stack to a new stack and maintain proper order
+	 * @param stack - the stack to be converted
+	 * @return the new stack
+	 */
 	public static Stack stackToStack(Stack stack) {
 		Queue tempQ = new Queue();
 		Stack tempStack = new Stack();

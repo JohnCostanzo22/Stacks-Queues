@@ -21,6 +21,7 @@ public class Stack {
 	 * @param newNode - Node to be added
 	 */
 	public void push(Node newNode) {
+		//handle if a bad node is passed in
 		if(newNode == null) {
 			throw new IllegalArgumentException("The Node is empty");
 		}
