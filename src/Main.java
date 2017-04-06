@@ -78,6 +78,21 @@ public class Main {
 		System.out.print(newStack.pop().getName() + " ");
 		System.out.println(newStack.pop().getName() + " ");
 		
+		queue.enqueue(node1);
+		queue.enqueue(node2);
+		queue.enqueue(node3);
+		queue.enqueue(node4);
+		
+		Queue newQueue = new Queue();
+		newQueue = queueToQueue(queue);
+		
+		System.out.println("Queue to Queue");
+		System.out.println("On the new Queue:");
+		System.out.print(newQueue.dequeue().getName() + " ");
+		System.out.print(newQueue.dequeue().getName() + " ");
+		System.out.print(newQueue.dequeue().getName() + " ");
+		System.out.println(newQueue.dequeue().getName() + " ");	
+		
 		//testing of handling blank things
 		stackToQueue(stack, queue);
 		queueToStack(queue, stack);
@@ -152,5 +167,31 @@ public class Main {
 		stackToQueue(stack, tempQ);
 		queueToStack(tempQ, tempStack);
 		return tempStack;
+	}
+	
+	/**
+	 * Extra method to convert a queue to a queue and maintain order
+	 * @param queue - queue to be converted
+	 * @return the new Queue
+	 */
+	public static Queue queueToQueue(Queue queue) {
+		Queue tempQ = new Queue();
+		try {
+			queue.peek();
+		} catch(IllegalArgumentException e) {
+			System.out.println("The Queue is empty");
+			return null;
+		}
+		Node temp = queue.dequeue();
+		while(temp != null) {
+			tempQ.enqueue(temp);
+			try {	
+				temp = queue.dequeue();
+			} catch(IllegalArgumentException e) {
+				break;		//Going to get here. Need to handle the exception, but keep
+							//going because method is not finished
+			}
+		}
+		return tempQ;
 	}
 }
